@@ -1,2 +1,3 @@
 rootProject.name = 'data-store-root'
 
+include 'domain_model'
