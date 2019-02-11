@@ -76,8 +76,8 @@ public class ObjectInstanceRepoTest {
 //        StringAttributeValue value = valFactory.createStringAttrVal(attribute).setValue("test_attr_value");
 //        instance.setObjectInstanceId(1L);
 //        StringAttributeValue value = new StringAttributeValue(instance, attribute, "test_attr_value");
-//        instance.addValue(valFactory.createStringAttrVal(attribute,"test_attr_value"));
-//        objectInstanceRepo.save(instance);
+        instance.addValue(valFactory.createStringAttrVal(attribute,"test_attr_value"));
+        objectInstanceRepo.save(instance);
         Assert.assertNotNull(instance.getObjectInstanceId());
 //        ObjectInstance newInstance = objectInstanceRepo.findById(instance.getObjectInstanceId()).orElse(null);
         ObjectInstance newInstance = objectInstanceRepo.findObjectInstanceByObjectInstanceId(instance.getObjectInstanceId()).orElse(null);
@@ -94,12 +94,12 @@ public class ObjectInstanceRepoTest {
 
     @Test
     public void persistObjectWithLongAttrVal() {
-        ObjectClass aClass = objectClassFactory.createObjectClass(infoFactory.createEntityInfo("objectClassName7"));
+        ObjectClass aClass = objectClassFactory.createObjectClass(infoFactory.createEntityInfo("objectClassName10"));
         classRepo.save(aClass);
-        EntityInfo info = infoFactory.createEntityInfo("objectInstanceName7");
+        EntityInfo info = infoFactory.createEntityInfo("objectClassName10");
         ObjectInstance instance = objectInstanceFactory.createObjectInstance(info, aClass);
-        Attribute lAttribute = attrFactory.createLongAttribute(infoFactory.createEntityInfo("testLongAttributeName11"));
-        Attribute strAttribute = attrFactory.createStringAttribute(infoFactory.createEntityInfo("testStringAttributeName11"));
+        Attribute lAttribute = attrFactory.createLongAttribute(infoFactory.createEntityInfo("testLongAttributeName14"));
+        Attribute strAttribute = attrFactory.createStringAttribute(infoFactory.createEntityInfo("testStringAttributeName14"));
         attributeRepo.save(lAttribute);
         attributeRepo.save(strAttribute);
         objectInstanceRepo.save(instance);
