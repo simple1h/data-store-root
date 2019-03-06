@@ -17,22 +17,22 @@ public class DataModelFactory {
     @Validated
     public class AttributeValueFactory {
         public StringAttributeValue createStringAttrVal(@Valid @NotNull
-                @CheckDataType(type = DataType.String, message = "Only DataType.String allowed") Attribute attribute, String value) {
+                @CheckDataType(type = DataType.STRING, message = "Only DataType.STRING allowed") Attribute attribute, String value) {
             return new StringAttributeValue(attribute, value);
         }
 
         public LongAttributeValue createLongAttrVal(@Valid @NotNull
-                @CheckDataType(type = DataType.Long, message = "Only DataType.Long allowed") Attribute attribute, Long value) {
+                @CheckDataType(type = DataType.LONG, message = "Only DataType.LONG allowed") Attribute attribute, Long value) {
             return new LongAttributeValue(attribute, value);
         }
 
         public DateAttributeValue createDateAttrVal(@Valid @NotNull
-                @CheckDataType(type = DataType.DateTime, message = "Only DataType.DateTime allowed") Attribute attribute, Date value) {
+                @CheckDataType(type = DataType.DATE_TIME, message = "Only DataType.DATE_TIME allowed") Attribute attribute, Date value) {
             return new DateAttributeValue(attribute, value);
         }
 
         public ChoiceAttributeValue createChoiceAttrVal(@Valid @NotNull
-                @CheckDataType(type = DataType.ChoiceValue, message = "Only DataType.ChoiceValue allowed") Attribute attribute, @Valid @NotNull ChoiceValue value) {
+                @CheckDataType(type = DataType.CHOICE_VALUE, message = "Only DataType.CHOICE_VALUE allowed") Attribute attribute, @Valid @NotNull ChoiceValue value) {
             return new ChoiceAttributeValue(attribute, value);
         }
     }
@@ -51,21 +51,21 @@ public class DataModelFactory {
 
 
         public PropertyValue createStringValue(@Valid @NotNull
-                @CheckDataType(type = DataType.String, message = "Only DataType.String allowed") Property property, @NotNull String value) {
+                @CheckDataType(type = DataType.STRING, message = "Only DataType.STRING allowed") Property property, @NotNull String value) {
             return new PropertyValue(property, value);
         }
 
         public PropertyValue createLongValue(@Valid @NotNull
-                @CheckDataType(type = DataType.Long, message = "Only DataType.Long allowed") Property property, @NotNull Long value) {
+                @CheckDataType(type = DataType.LONG, message = "Only DataType.LONG allowed") Property property, @NotNull Long value) {
             return new PropertyValue(property, value);
         }
         public PropertyValue createDateValue(@Valid @NotNull
-                @CheckDataType(type = DataType.DateTime, message = "Only DataType.DateTime allowed") Property property, @NotNull Date value) {
+                @CheckDataType(type = DataType.DATE_TIME, message = "Only DataType.DATE_TIME allowed") Property property, @NotNull Date value) {
             return new PropertyValue(property, value);
         }
 
         public PropertyValue createChoiceValue(@Valid @NotNull
-               @CheckDataType(type = DataType.ChoiceValue, message = "Only DataType.ChoiceValue allowed") Property property, @Valid @NotNull ChoiceValue value) {
+               @CheckDataType(type = DataType.CHOICE_VALUE, message = "Only DataType.CHOICE_VALUE allowed") Property property, @Valid @NotNull ChoiceValue value) {
             return new PropertyValue(property, value);
         }
     }
@@ -75,19 +75,19 @@ public class DataModelFactory {
 
 
         public Property createStringProperty(@Valid @NotNull EntityInfo info) {
-            return create(info, DataType.String);
+            return create(info, DataType.STRING);
         }
 
         public Property createLongProperty(@Valid @NotNull EntityInfo info) {
-            return create(info, DataType.Long);
+            return create(info, DataType.LONG);
         }
 
         public Property createDateProperty(@Valid @NotNull EntityInfo info) {
-            return create(info, DataType.DateTime);
+            return create(info, DataType.DATE_TIME);
         }
 
         public Property createChoiceProperty(@Valid @NotNull EntityInfo info) {
-            return create(info, DataType.ChoiceValue);
+            return create(info, DataType.CHOICE_VALUE);
         }
 
         private  Property create(EntityInfo info, DataType type) {
@@ -125,16 +125,16 @@ public class DataModelFactory {
         }
 
         public Attribute createStringAttribute(@Valid @NotNull EntityInfo info) {
-            return new Attribute(info, DataType.String);
+            return new Attribute(info, DataType.STRING);
         }
         public Attribute createLongAttribute(@Valid @NotNull EntityInfo info) {
-            return new Attribute(info, DataType.Long);
+            return new Attribute(info, DataType.LONG);
         }
         public Attribute createDateAttribute(@Valid @NotNull EntityInfo info) {
-            return new Attribute(info, DataType.DateTime);
+            return new Attribute(info, DataType.DATE_TIME);
         }
         public Attribute createChoiceAttribute(@Valid @NotNull EntityInfo info) {
-            return new Attribute(info, DataType.ChoiceValue);
+            return new Attribute(info, DataType.CHOICE_VALUE);
         }
     }
     @Component

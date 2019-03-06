@@ -1,25 +1,19 @@
 package com.simple.domain_model.domain;
 
-import lombok.*;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.util.*;
+import java.util.Collections;
+import java.util.LinkedHashSet;
+import java.util.Objects;
+import java.util.Set;
 
 @NoArgsConstructor
 @Entity
 @Table(name = "Attribute", uniqueConstraints = @UniqueConstraint(columnNames = {"name"}))
-//todo добавить поддержку типов аттрибутов
-public class Attribute {
+public class Attribute extends DataModelObject{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "attr_owner_gen")
-    @SequenceGenerator(name = "attr_owner_gen", sequenceName = "attr_owner_gen", allocationSize = 10, initialValue = 10000)
-    private Long attributeId;
-
-    @Embedded
-    @NotNull
-    private EntityInfo info;
+    private DataType type;
 
     @Embedded
     private AttributeProperties properties = new AttributeProperties();
@@ -27,19 +21,9 @@ public class Attribute {
     @ManyToMany(mappedBy = "attributes")
     private Set<ObjectClass> objectClasses = new LinkedHashSet<>();
 
-    private DataType type;
-
     Attribute(EntityInfo info, DataType type) {
         this.info = info;
         this.type = type;
-    }
-
-    public Long getAttributeId() {
-        return attributeId;
-    }
-
-    public EntityInfo getInfo() {
-        return info;
     }
 
     public DataType getType() {
@@ -70,19 +54,5 @@ public class Attribute {
             if (aClass.attributes().contains(this)) aClass.removeAttribute(this);
         }
         return this;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Attribute)) return false;
-        Attribute attribute = (Attribute) o;
-        return Objects.equals(attributeId, attribute.attributeId) &&
-                Objects.equals(info, attribute.info);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(attributeId, info);
     }
 }

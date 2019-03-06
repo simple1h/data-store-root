@@ -17,7 +17,7 @@ public class PropertyValue {
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "propId")
+    @JoinColumn(name = "id")
     private Property property;
 
     @ManyToOne
@@ -68,22 +68,22 @@ public class PropertyValue {
     }
 
     public String getStringValue() throws OperationNotSupportedException {
-        validateType(DataType.String, "Instance not contain String data");
+        validateType(DataType.STRING, "Instance not contain STRING data");
         return stringValue;
     }
 
     public Date getDateValue() throws OperationNotSupportedException {
-        validateType(DataType.DateTime, "Instance not contain DateTime data");
+        validateType(DataType.DATE_TIME, "Instance not contain DATE_TIME data");
         return dateValue;
     }
 
     public Long getLongValue() throws OperationNotSupportedException {
-        validateType(DataType.Long, "Instance not contain Long data");
+        validateType(DataType.LONG, "Instance not contain LONG data");
         return longValue;
     }
 
     public ChoiceValue getChoiceValue() throws OperationNotSupportedException {
-        validateType(DataType.ChoiceValue, "Instance not contain Long data");
+        validateType(DataType.CHOICE_VALUE, "Instance not contain LONG data");
         return choiceValue;
     }
 

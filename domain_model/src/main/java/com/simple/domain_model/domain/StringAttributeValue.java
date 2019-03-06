@@ -17,7 +17,7 @@ public class StringAttributeValue extends AttributeValue{
 
     StringAttributeValue(Attribute attr) {
         this.attr = attr;
-        this.id.setAttrId(attr.getAttributeId());
+        this.id.setAttrId(attr.getId());
     }
 
     StringAttributeValue(Attribute attr, String value) {

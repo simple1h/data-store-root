@@ -36,8 +36,8 @@ public class ChoiceSetRepoTest {
 
         ChoiceSet set = choiceFactory.createChoiceSet(infoFactory.createEntityInfo(name, displayName, description));
         repo.save(set);
-        Assert.assertNotNull(set.getChoiceId());
-        ChoiceSet newSet = repo.findById(set.getChoiceId()).orElse(null);
+        Assert.assertNotNull(set.getId());
+        ChoiceSet newSet = repo.findById(set.getId()).orElse(null);
         Assert.assertNotNull(newSet);
     }
 
@@ -55,8 +55,8 @@ public class ChoiceSetRepoTest {
                 .addValue(choiceValFactory.createChoiceValue("yellow"));
 
         repo.save(colorSet);
-        Assert.assertNotNull(colorSet.getChoiceId());
-        ChoiceSet newSet = repo.findById(colorSet.getChoiceId()).orElse(null);
+        Assert.assertNotNull(colorSet.getId());
+        ChoiceSet newSet = repo.findById(colorSet.getId()).orElse(null);
         Assert.assertNotNull(newSet);
         Assert.assertEquals(newSet.getValueList().size(), 5);
 
@@ -71,8 +71,8 @@ public class ChoiceSetRepoTest {
                 forEach(color -> digits.addValue(choiceValFactory.createChoiceValue(color)));
 
         repo.save(digits);
-        Assert.assertNotNull(digits.getChoiceId());
-        ChoiceSet newSet = repo.findById(digits.getChoiceId()).orElse(null);
+        Assert.assertNotNull(digits.getId());
+        ChoiceSet newSet = repo.findById(digits.getId()).orElse(null);
         Assert.assertNotNull(newSet);
         Assert.assertEquals(newSet.getValueList().size(), 6);
 
@@ -102,8 +102,8 @@ public class ChoiceSetRepoTest {
                 .addValue(choiceValFactory.createChoiceValue("yellow"));
 
         repo.save(colorSet);
-        Assert.assertNotNull(colorSet.getChoiceId());
-        ChoiceSet newSet = repo.findById(colorSet.getChoiceId()).orElse(null);
+        Assert.assertNotNull(colorSet.getId());
+        ChoiceSet newSet = repo.findById(colorSet.getId()).orElse(null);
         Assert.assertNotNull(newSet);
         Assert.assertEquals(colorSet.getValueList().size(), newSet.getValueList().size());
     }
@@ -116,8 +116,8 @@ public class ChoiceSetRepoTest {
 
         ChoiceSet colorSet = choiceFactory.createChoiceSet(infoFactory.createEntityInfo(name, displayName, description));
         repo.save(colorSet);
-        Assert.assertNotNull(colorSet.getChoiceId());
-        ChoiceSet newSet = repo.findById(colorSet.getChoiceId()).orElse(null);
+        Assert.assertNotNull(colorSet.getId());
+        ChoiceSet newSet = repo.findById(colorSet.getId()).orElse(null);
         Assert.assertNotNull(newSet);
         newSet.getInfo().setDescription("new value for description field");
         repo.save(newSet);

@@ -35,7 +35,7 @@ public class AttributePropertiesTest {
     @Before
     public void setUp() throws Exception {
         pString = propFactory.createStringProperty(infoFactory.createEntityInfo("string property","display string property","best string property an ether"));
-        pLong = propFactory.createLongProperty(infoFactory.createEntityInfo("Long property","display Long property","best Long property an ether"));
+        pLong = propFactory.createLongProperty(infoFactory.createEntityInfo("LONG property","display LONG property","best LONG property an ether"));
         pDate = propFactory.createDateProperty(infoFactory.createEntityInfo("Date property","display Date property","best string Date an ether"));
 
 

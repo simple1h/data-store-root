@@ -1,26 +1,26 @@
 package com.simple.domain_model.domain;
 
 public enum DataType {
-    String,
-    DateTime,
-    ChoiceValue,
-    Long
-//    String("java.lang.String"),
-//    DateTime("java.sql.Timestamp"),
-//    ChoiceValue("com.simple.domain_model.domain.ChoiceValue"),
-//    Long("java.lang.Long");
+    STRING,
+    DATE_TIME,
+    CHOICE_VALUE,
+    LONG
+//    STRING("java.lang.STRING"),
+//    DATE_TIME("java.sql.Timestamp"),
+//    CHOICE_VALUE("com.simple.domain_model.domain.CHOICE_VALUE"),
+//    LONG("java.lang.LONG");
 
-/*    private final String propertyType;
+/*    private final STRING propertyType;
 
-    DataType(String className) {
+    DataType(STRING className) {
         this.propertyType = className;
     }
 
-    public java.lang.String getPropertyType() {
+    public java.lang.STRING getPropertyType() {
         return propertyType;
     }
 
-    public static DataType getValue(String className) {
+    public static DataType getValue(STRING className) {
         for (DataType type : DataType.values()) {
             if (type.getPropertyType().equalsIgnoreCase(className)) {
                 return type;

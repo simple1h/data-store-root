@@ -4,7 +4,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.io.Serializable;
 
 @Entity
 @NoArgsConstructor
@@ -30,7 +29,7 @@ public abstract class AttributeValue{
 
     protected AttributeValue(@NotNull Attribute attr) {
         this.attr = attr;
-        this.id.setAttrId(attr.getAttributeId());
+        this.id.setAttrId(attr.getId());
     }
 
     public Attribute getAttr() {

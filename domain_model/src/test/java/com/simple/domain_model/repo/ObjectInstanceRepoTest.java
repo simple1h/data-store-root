@@ -69,7 +69,7 @@ public class ObjectInstanceRepoTest {
 //        todo создать аттрибут
         Attribute attribute = attrFactory.createStringAttribute(infoFactory.createEntityInfo("testAttributeName10"));
         attributeRepo.save(attribute);
-//        Attribute newAttribute = attributeRepo.findById(attribute.getAttributeId()).orElse(null);
+//        Attribute newAttribute = attributeRepo.findById(attribute.getId()).orElse(null);
 
 //        todo создать значение для атрибута
         objectInstanceRepo.save(instance);

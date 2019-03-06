@@ -52,7 +52,7 @@ public class AttributeRepoTest {
         if (!isSaved) {
             pString = propFactory.createStringProperty(infoFactory.createEntityInfo("string property","display string property","best string property an ether"));
             pString1 = propFactory.createStringProperty(infoFactory.createEntityInfo("string property1","display string property","best string property an ether"));
-            pLong = propFactory.createLongProperty(infoFactory.createEntityInfo("Long property","display Long property","best Long property an ether"));
+            pLong = propFactory.createLongProperty(infoFactory.createEntityInfo("LONG property","display LONG property","best LONG property an ether"));
             pDate = propFactory.createDateProperty(infoFactory.createEntityInfo("Date property","display Date property","best string Date an ether"));
 
             propertyRepo.save(pLong);
@@ -62,7 +62,7 @@ public class AttributeRepoTest {
 
             isSaved = true;
         } else {
-            pLong = propertyRepo.findByInfoName("Long property");
+            pLong = propertyRepo.findByInfoName("LONG property");
             pString = propertyRepo.findByInfoName("string property");
             pString1 = propertyRepo.findByInfoName("string property1");
             pDate = propertyRepo.findByInfoName("Date property");
@@ -82,8 +82,8 @@ public class AttributeRepoTest {
 
 
         attributeRepo.save(attribute);
-        Assert.assertNotNull(attribute.getAttributeId());
-        Attribute newAttribute = attributeRepo.findById(attribute.getAttributeId()).orElse(null);
+        Assert.assertNotNull(attribute.getId());
+        Attribute newAttribute = attributeRepo.findById(attribute.getId()).orElse(null);
         Assert.assertNotNull(newAttribute);
     }
 
@@ -91,8 +91,8 @@ public class AttributeRepoTest {
     public void attributeEmptyPropertiesTest() {
         Attribute attribute = attrFactory.createStringAttribute(infoFactory.createEntityInfo("testAttributeName1"));
         attributeRepo.save(attribute);
-        Assert.assertNotNull(attribute.getAttributeId());
-        Attribute newAttribute = attributeRepo.findById(attribute.getAttributeId()).orElse(null);
+        Assert.assertNotNull(attribute.getId());
+        Attribute newAttribute = attributeRepo.findById(attribute.getId()).orElse(null);
         Assert.assertNotNull(newAttribute);
     }
 
@@ -106,7 +106,7 @@ public class AttributeRepoTest {
 
         attributeRepo.save(attribute);
 
-        Attribute newAttribute = attributeRepo.findById(attribute.getAttributeId()).orElse(null);
+        Attribute newAttribute = attributeRepo.findById(attribute.getId()).orElse(null);
         Assert.assertNotNull(newAttribute);
         Assert.assertEquals(attribute, newAttribute);
 
@@ -118,7 +118,7 @@ public class AttributeRepoTest {
 
         attributeRepo.save(newAttribute);
 
-        Attribute newAttribute1 = attributeRepo.findById(newAttribute.getAttributeId()).orElse(null);
+        Attribute newAttribute1 = attributeRepo.findById(newAttribute.getId()).orElse(null);
         Assert.assertNotNull(newAttribute1);
         Assert.assertEquals(newAttribute, newAttribute1);
 

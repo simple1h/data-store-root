@@ -51,8 +51,8 @@ public class ObjectClassRepoTest {
         if (!isSaved) {
             pString = propFactory.createStringProperty(infoFactory.createEntityInfo("object_string property","display string property","best string property an ether"));
             pString1 = propFactory.createStringProperty(infoFactory.createEntityInfo("object_string property1","display string property","best string property an ether"));
-            pLong = propFactory.createLongProperty(infoFactory.createEntityInfo("object_Long property","display Long property","best Long property an ether"));
-            pDate = propFactory.createDateProperty(infoFactory.createEntityInfo("object_Date property","display Date property","best string Date an ether"));
+            pLong = propFactory.createLongProperty(infoFactory.createEntityInfo("object_long property","display LONG property","best LONG property an ether"));
+            pDate = propFactory.createDateProperty(infoFactory.createEntityInfo("object_date property","display Date property","best string Date an ether"));
 
             propertyRepo.save(pLong);
             propertyRepo.save(pString);
@@ -61,10 +61,10 @@ public class ObjectClassRepoTest {
 
             isSaved = true;
         } else {
-            pLong = propertyRepo.findByInfoName("Long property");
-            pString = propertyRepo.findByInfoName("string property");
-            pString1 = propertyRepo.findByInfoName("string property1");
-            pDate = propertyRepo.findByInfoName("Date property");
+            pLong = propertyRepo.findByInfoName("object_long property");
+            pString = propertyRepo.findByInfoName("object_string property");
+            pString1 = propertyRepo.findByInfoName("object_string property1");
+            pDate = propertyRepo.findByInfoName("object_date property");
         }
 
         stringVal = propValFactory.createStringValue(pString,"test_value");
@@ -77,8 +77,8 @@ public class ObjectClassRepoTest {
     public void persistEmptyObjectClassTest() {
         ObjectClass aClass = objectClassFactory.createObjectClass(infoFactory.createEntityInfo("objectClassName"));
         classRepo.save(aClass);
-        Assert.assertNotNull(aClass.getObjectClassId());
-        ObjectClass newClass = classRepo.findById(aClass.getObjectClassId()).orElse(null);
+        Assert.assertNotNull(aClass.getId());
+        ObjectClass newClass = classRepo.findById(aClass.getId()).orElse(null);
         Assert.assertNotNull(newClass);
     }
 
@@ -87,7 +87,7 @@ public class ObjectClassRepoTest {
         ObjectClass aClass = objectClassFactory.createObjectClass(infoFactory.createEntityInfo("objectClassName1"));
         Stream.of(stringVal, longVal, dateVal).forEach(propVal -> aClass.properties().addProperty(propVal));
         classRepo.save(aClass);
-        Assert.assertNotNull(aClass.getObjectClassId());
+        Assert.assertNotNull(aClass.getId());
     }
 
     @Test
@@ -107,8 +107,8 @@ public class ObjectClassRepoTest {
                     .parent()
                 .addChild(objectClassFactory.createObjectClass(infoFactory.createEntityInfo("sub4_objectClassName1")));
         classRepo.save(aClass);
-        Assert.assertNotNull(aClass.getObjectClassId());
-        ObjectClass aClassNew = classRepo.findById(aClass.getObjectClassId()).orElse(null);
+        Assert.assertNotNull(aClass.getId());
+        ObjectClass aClassNew = classRepo.findById(aClass.getId()).orElse(null);
         Assert.assertNotNull(aClassNew);
         Assert.assertNotNull(aClassNew.childs());
         Assert.assertEquals(aClassNew.childs().size(), 4);
@@ -121,12 +121,12 @@ public class ObjectClassRepoTest {
         ObjectClass aClassSub2 = objectClassFactory.createObjectClass(infoFactory.createEntityInfo("sub2_objectClassName3"));
         aClass.addChild(aClassSub1).addChild(aClassSub2);
         classRepo.save(aClass);
-        Assert.assertNotNull(aClass.getObjectClassId());
-        ObjectClass aClassNew = classRepo.findById(aClass.getObjectClassId()).orElse(null);
+        Assert.assertNotNull(aClass.getId());
+        ObjectClass aClassNew = classRepo.findById(aClass.getId()).orElse(null);
         Assert.assertEquals(aClassNew.childs().size(), 2);
         aClassNew.removeChild(aClassSub1);
         classRepo.save(aClassNew);
-        Long id = aClassNew.getObjectClassId();
+        Long id = aClassNew.getId();
         Assert.assertNotNull(id);
         ObjectClass aClassNew1 = classRepo.findById(id).orElse(null);
         Assert.assertNotNull(aClassNew1);
@@ -140,8 +140,8 @@ public class ObjectClassRepoTest {
         ObjectClass aClass = objectClassFactory.createObjectClass(infoFactory.createEntityInfo("objectClassName4"));
         aClass.addAttribute(attribute);
         classRepo.save(aClass);
-        Assert.assertNotNull(aClass.getObjectClassId());
-        ObjectClass aClassNew = classRepo.findById(aClass.getObjectClassId()).orElse(null);
+        Assert.assertNotNull(aClass.getId());
+        ObjectClass aClassNew = classRepo.findById(aClass.getId()).orElse(null);
         Assert.assertNotNull(aClassNew);
         Assert.assertNotNull(aClassNew.attributes());
         Assert.assertEquals(aClassNew.attributes().size(), 1);
@@ -153,11 +153,11 @@ public class ObjectClassRepoTest {
         ObjectClass aClass = objectClassFactory.createObjectClass(infoFactory.createEntityInfo("objectClassName5"));
         aClass.addAttribute(attribute);
         classRepo.save(aClass);
-        Assert.assertNotNull(aClass.getObjectClassId());
-        ObjectClass aClassNew = classRepo.findById(aClass.getObjectClassId()).orElse(null);
+        Assert.assertNotNull(aClass.getId());
+        ObjectClass aClassNew = classRepo.findById(aClass.getId()).orElse(null);
         aClassNew.removeAttribute(attribute);
         classRepo.save(aClassNew);
-        ObjectClass aClassNew1 = classRepo.findById(aClass.getObjectClassId()).orElse(null);
+        ObjectClass aClassNew1 = classRepo.findById(aClass.getId()).orElse(null);
         Assert.assertNotNull(aClassNew1);
         Assert.assertNotNull(aClassNew1.attributes());
         Assert.assertEquals(aClassNew1.attributes().size(), 0);

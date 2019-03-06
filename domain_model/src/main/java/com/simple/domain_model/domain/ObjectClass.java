@@ -7,7 +7,6 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Objects;
@@ -17,16 +16,7 @@ import java.util.Set;
 @Entity
 @Table(name = "ObjectClass", uniqueConstraints = @UniqueConstraint(columnNames = {"name"}))
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class ObjectClass {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "object_owner_gen")
-    @SequenceGenerator(name="object_owner_gen", sequenceName = "object_owner_gen", allocationSize=10, initialValue = 100)
-    private Long objectClassId;
-
-    @Embedded
-    @NotNull
-    private EntityInfo info;
+public class ObjectClass extends DataModelObject{
 
     @Embedded
     private ObjectClassProperties properties = new ObjectClassProperties();
@@ -42,16 +32,8 @@ public class ObjectClass {
     @ManyToMany (fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST,CascadeType.MERGE})
     private Set<Attribute> attributes = new LinkedHashSet<>();
 
-    public ObjectClass(EntityInfo info) {
+    ObjectClass(EntityInfo info) {
         this.info = info;
-    }
-
-    public Long getObjectClassId() {
-        return objectClassId;
-    }
-
-    public EntityInfo getInfo() {
-        return info;
     }
 
     public ObjectClassProperties properties() {
@@ -107,19 +89,5 @@ public class ObjectClass {
             if (attribute.objectClasses().contains(this)) attribute.removeObjectClass(this);
         }
         return this;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof ObjectClass)) return false;
-        ObjectClass that = (ObjectClass) o;
-        return Objects.equals(objectClassId, that.objectClassId) &&
-                Objects.equals(info, that.info);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(objectClassId, info);
     }
 }

@@ -20,7 +20,7 @@ public class ChoiceAttributeValue extends AttributeValue {
 
     ChoiceAttributeValue(Attribute attr) {
         this.attr = attr;
-        this.id.setAttrId(attr.getAttributeId());
+        this.id.setAttrId(attr.getId());
     }
 
     ChoiceAttributeValue(Attribute attr, ChoiceValue value) {

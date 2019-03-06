@@ -20,7 +20,7 @@ public class DateAttributeValue extends AttributeValue {
 
     DateAttributeValue(Attribute attr) {
         this.attr = attr;
-        this.id.setAttrId(attr.getAttributeId());
+        this.id.setAttrId(attr.getId());
     }
 
     DateAttributeValue(Attribute attr, Date value) {
