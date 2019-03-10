@@ -1,3 +1,63 @@
 group 'data-store'
 version '1.0-SNAPSHOT'
 
+allprojects {
+    apply plugin: 'java'
+    apply plugin: 'jacoco'
+}
+subprojects {
+
+    jacoco {
+        toolVersion = "0.8.2"
+    }
+
+    jacocoTestReport {
+
+        additionalSourceDirs = files(sourceSets.main.allSource.srcDirs)
+        classDirectories = files(sourceSets.main.output)
+        sourceDirectories = files(sourceSets.main.allSource.srcDirs)
+
+        reports {
+
+            csv.enabled false
+            html.enabled true
+            xml.enabled true
+        }
+    }
+    test.finalizedBy(project.tasks.jacocoTestReport)
+}
+
+task jacocoRootReport(type: org.gradle.testing.jacoco.tasks.JacocoReport) {
+
+    additionalSourceDirs = files(subprojects.sourceSets.main.allSource.srcDirs)
+    classDirectories = files(subprojects.sourceSets.main.output)
+    dependsOn = subprojects.test
+    executionData = files(subprojects.jacocoTestReport.executionData)
+    sourceDirectories = files(subprojects.sourceSets.main.allSource.srcDirs)
+
+    reports {
+
+        csv.enabled false
+        html.enabled true
+        xml.enabled true
+    }
+
+    onlyIf = {
+        true
+    }
+
+    doFirst {
+        executionData = files(executionData.findAll {
+            it.exists()
+        }) 
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+//    testImplementation ('org.jacoco:org.jacoco.ant':0.8.1)
+    testCompile group: 'org.jacoco', name: 'org.jacoco.ant', version: '0.8.1'
+}

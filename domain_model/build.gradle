@@ -12,12 +12,9 @@ buildscript {
 
 plugins {
 	id "io.spring.dependency-management" version "1.0.5.RELEASE"
+	id "org.sonarqube" version "2.7"
 }
 
-/*bootJar {
-	baseName = 'data-store-application'
-	version = '0.0.1-SNAPSHOT'
-}*/
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
