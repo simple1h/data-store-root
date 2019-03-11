@@ -11,6 +11,7 @@ public class DataTypeValidator implements ConstraintValidator<CheckDataType, Obj
 
    private DataType type;
 
+   @Override
    public void initialize(CheckDataType constraint) {
       type = constraint.type();
    }

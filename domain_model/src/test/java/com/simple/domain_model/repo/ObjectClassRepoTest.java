@@ -111,7 +111,7 @@ public class ObjectClassRepoTest {
         ObjectClass aClassNew = classRepo.findById(aClass.getId()).orElse(null);
         Assert.assertNotNull(aClassNew);
         Assert.assertNotNull(aClassNew.childs());
-        Assert.assertEquals(aClassNew.childs().size(), 4);
+        Assert.assertEquals(4,aClassNew.childs().size());
     }
 
     @Test
@@ -123,14 +123,14 @@ public class ObjectClassRepoTest {
         classRepo.save(aClass);
         Assert.assertNotNull(aClass.getId());
         ObjectClass aClassNew = classRepo.findById(aClass.getId()).orElse(null);
-        Assert.assertEquals(aClassNew.childs().size(), 2);
+        Assert.assertEquals(2,aClassNew.childs().size());
         aClassNew.removeChild(aClassSub1);
         classRepo.save(aClassNew);
         Long id = aClassNew.getId();
         Assert.assertNotNull(id);
         ObjectClass aClassNew1 = classRepo.findById(id).orElse(null);
         Assert.assertNotNull(aClassNew1);
-        Assert.assertEquals(aClassNew1.childs().size(), 1);
+        Assert.assertEquals(1,aClassNew1.childs().size());
     }
 
     @Test
@@ -144,7 +144,7 @@ public class ObjectClassRepoTest {
         ObjectClass aClassNew = classRepo.findById(aClass.getId()).orElse(null);
         Assert.assertNotNull(aClassNew);
         Assert.assertNotNull(aClassNew.attributes());
-        Assert.assertEquals(aClassNew.attributes().size(), 1);
+        Assert.assertEquals(1,aClassNew.attributes().size());
     }
 
     @Test
@@ -160,6 +160,6 @@ public class ObjectClassRepoTest {
         ObjectClass aClassNew1 = classRepo.findById(aClass.getId()).orElse(null);
         Assert.assertNotNull(aClassNew1);
         Assert.assertNotNull(aClassNew1.attributes());
-        Assert.assertEquals(aClassNew1.attributes().size(), 0);
+        Assert.assertEquals(0,aClassNew1.attributes().size());
     }
 }

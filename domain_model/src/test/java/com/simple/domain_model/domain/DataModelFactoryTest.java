@@ -79,7 +79,7 @@ public class DataModelFactoryTest {
     public void createStringAttributeValueTest() {
         Attribute attribute = attrFactory.createStringAttribute(infoFactory.createEntityInfo("testAttributeName"));
         StringAttributeValue value = valFactory.createStringAttrVal(attribute, "test");
-        Assert.assertEquals(value.getValue(), "test");
+        Assert.assertEquals("test", value.getValue());
     }
 
     @Test
@@ -101,7 +101,7 @@ public class DataModelFactoryTest {
     public void createChoiceAttributeValueTest() {
         Attribute attribute = attrFactory.createChoiceAttribute(infoFactory.createEntityInfo("testAttributeName"));
         ChoiceAttributeValue value = valFactory.createChoiceAttrVal(attribute, choiceValFactory.createChoiceValue("test"));
-        Assert.assertEquals(value.getValue().getValue(), "test");
+        Assert.assertEquals("test",value.getValue().getValue());
     }
 
     @Test (expected = ConstraintViolationException.class)
@@ -114,49 +114,49 @@ public class DataModelFactoryTest {
     public void createStringValueTest() throws  OperationNotSupportedException {
         Property property = propFactory.createStringProperty(infoFactory.createEntityInfo("testPropertyName"));
         PropertyValue value = propValFactory.createStringValue(property, "test");
-        Assert.assertEquals(value.getStringValue(), "test");
+        Assert.assertEquals("test",value.getStringValue());
     }
 
     @Test (expected = ConstraintViolationException.class)
     public void validateStringPropertyTypeTest() throws  OperationNotSupportedException {
         Property property = propFactory.createLongProperty(infoFactory.createEntityInfo("testPropertyName"));
         PropertyValue value = propValFactory.createStringValue(property, "test");
-        Assert.assertEquals(value.getStringValue(), "test");
+        Assert.assertEquals("test",value.getStringValue());
     }
 
     @Test (expected = ConstraintViolationException.class)
     public void validateLongPropertyTypeTest() throws  OperationNotSupportedException {
         Property property = propFactory.createStringProperty(infoFactory.createEntityInfo("testPropertyName"));
         PropertyValue value = propValFactory.createLongValue(property, 1L);
-        Assert.assertEquals(value.getStringValue(), "test");
+        Assert.assertEquals("test",value.getStringValue());
     }
 
     @Test (expected = ConstraintViolationException.class)
     public void validateDatePropertyTypeTest() throws  OperationNotSupportedException {
         Property property = propFactory.createLongProperty(infoFactory.createEntityInfo("testPropertyName"));
         PropertyValue value = propValFactory.createDateValue(property, new Date());
-        Assert.assertEquals(value.getStringValue(), "test");
+        Assert.assertEquals("test",value.getStringValue());
     }
 
     @Test (expected = ConstraintViolationException.class)
     public void validateChoicePropertyTypeTest() throws  OperationNotSupportedException {
         Property property = propFactory.createLongProperty(infoFactory.createEntityInfo("testPropertyName"));
         PropertyValue value = propValFactory.createChoiceValue(property, choiceValFactory.createChoiceValue("test"));
-        Assert.assertEquals(value.getStringValue(), "test");
+        Assert.assertEquals("test",value.getStringValue());
     }
 
     @Test (expected = ConstraintViolationException.class)
     public void createStringValueValidationTest() throws OperationNotSupportedException {
         Property property = propFactory.createStringProperty(null);
         PropertyValue value = propValFactory.createStringValue(property, "test");
-        Assert.assertEquals(value.getStringValue(), "test");
+        Assert.assertEquals("test",value.getStringValue());
     }
 
     @Test (expected = ConstraintViolationException.class)
     public void createEntityEmptyValidationTest() throws OperationNotSupportedException {
         Property property = propFactory.createStringProperty(infoFactory.createEntityInfo(""));
         PropertyValue value = propValFactory.createStringValue(property, "test");
-        Assert.assertEquals(value.getStringValue(), "test");
+        Assert.assertEquals("test",value.getStringValue());
     }
 
     @Test
@@ -176,7 +176,7 @@ public class DataModelFactoryTest {
     public void createChoicePropertyValueTest() throws OperationNotSupportedException {
         Property property = propFactory.createChoiceProperty(infoFactory.createEntityInfo("choicePropertyName"));
         PropertyValue value = propValFactory.createChoiceValue(property, choiceValFactory.createChoiceValue("test"));
-        Assert.assertEquals(value.getChoiceValue().getValue(), "test");
+        Assert.assertEquals("test",value.getChoiceValue().getValue());
     }
 
     @Test

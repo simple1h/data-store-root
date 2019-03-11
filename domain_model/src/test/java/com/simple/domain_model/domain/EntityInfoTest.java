@@ -19,15 +19,15 @@ public class EntityInfoTest {
     @Test
     public void createEntityInfoTest() {
         EntityInfo info = infoFactory.createEntityInfo("test_name", "display_name", "description");
-        Assert.assertEquals(info.getName(), "test_name");
-        Assert.assertEquals(info.getDescription(), "description");
-        Assert.assertEquals(info.getDisplayName(), "display_name");
+        Assert.assertEquals("test_name",info.getName());
+        Assert.assertEquals("description",info.getDescription());
+        Assert.assertEquals("display_name",info.getDisplayName());
     }
 
     @Test
     public void partialInfoCreateTest() {
         EntityInfo info = infoFactory.createEntityInfo("test_name", null, null);
-        Assert.assertEquals(info.getName(), "test_name");
+        Assert.assertEquals("test_name",info.getName());
         Assert.assertNull(info.getDescription());
         Assert.assertNull(info.getDisplayName());
     }
@@ -35,8 +35,8 @@ public class EntityInfoTest {
     @Test
     public void partialCreate_2Args() {
         EntityInfo info = infoFactory.createEntityInfo("test_name", "display_name");
-        Assert.assertEquals(info.getName(), "test_name");
-        Assert.assertEquals(info.getDisplayName(), "display_name");
+        Assert.assertEquals("test_name",info.getName());
+        Assert.assertEquals("display_name",info.getDisplayName());
         Assert.assertNull(info.getDescription());
 
     }
@@ -44,7 +44,7 @@ public class EntityInfoTest {
     @Test
     public void partialCreate_1Args() {
         EntityInfo info = infoFactory.createEntityInfo("test_name");
-        Assert.assertEquals(info.getName(), "test_name");
+        Assert.assertEquals("test_name",info.getName());
         Assert.assertNull(info.getDescription());
         Assert.assertNull(info.getDisplayName());
 

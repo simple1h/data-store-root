@@ -2,23 +2,20 @@ package com.simple.domain_model.domain;
 
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 @Entity
 @NoArgsConstructor
 public class ChoiceAttributeValue extends AttributeValue {
 
-    @NotNull
     @ManyToOne
     @JoinColumn(name = "valueId")
     private ChoiceValue value;
 
-    ChoiceAttributeValue(Attribute attr) {
+    private ChoiceAttributeValue(Attribute attr) {
         this.attr = attr;
         this.id.setAttrId(attr.getId());
     }

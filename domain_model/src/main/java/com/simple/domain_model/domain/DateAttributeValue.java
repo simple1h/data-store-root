@@ -4,8 +4,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Objects;
@@ -14,11 +12,10 @@ import java.util.Objects;
 @NoArgsConstructor
 public class DateAttributeValue extends AttributeValue {
 
-    @NotNull
     @Column(name = "date_value")
     private Timestamp value;
 
-    DateAttributeValue(Attribute attr) {
+    private DateAttributeValue(Attribute attr) {
         this.attr = attr;
         this.id.setAttrId(attr.getId());
     }

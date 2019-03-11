@@ -1,11 +1,13 @@
 package com.simple.domain_model.domain;
 
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
 
 @NamedEntityGraph(
         name = "instance_attribute_values",
@@ -31,14 +33,7 @@ public class ObjectInstance {
     private EntityInfo info;
 
     @OneToMany (mappedBy = "object",orphanRemoval = true, cascade = CascadeType.ALL)
-//    @OneToMany (mappedBy = "object",orphanRemoval = true)
-//    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
-//    @MapKeyJoinColumn(name="attribute_id")
-//    private Map<Attribute, StringAttributeValue> values = new HashMap<>();
-//    private List<StringAttributeValue> values = new ArrayList<>();
     private List<AttributeValue> values = new ArrayList<>();
-//    private List<LongAttributeValue> values = new ArrayList<>();
-
 //    todo добавить коллекцию значений аттрибутов - Map<Attribute, AttributeValue>
 
     protected ObjectInstance(EntityInfo info, ObjectClass aClass) {

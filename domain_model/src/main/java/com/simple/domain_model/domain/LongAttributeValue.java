@@ -2,20 +2,18 @@ package com.simple.domain_model.domain;
 
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import java.util.Objects;
 
 @Entity
 @NoArgsConstructor
 public class LongAttributeValue extends AttributeValue {
-    @NotNull
+
     @Column(name = "long_value")
     private Long value;
 
-    LongAttributeValue(Attribute attr) {
+    private LongAttributeValue(Attribute attr) {
         super(attr);
     }
 

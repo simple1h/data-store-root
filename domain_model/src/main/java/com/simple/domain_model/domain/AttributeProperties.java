@@ -1,9 +1,10 @@
 package com.simple.domain_model.domain;
 
-import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
-import java.util.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 @Embeddable
 public class AttributeProperties {

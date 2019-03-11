@@ -58,7 +58,7 @@ public class ChoiceSetRepoTest {
         Assert.assertNotNull(colorSet.getId());
         ChoiceSet newSet = repo.findById(colorSet.getId()).orElse(null);
         Assert.assertNotNull(newSet);
-        Assert.assertEquals(newSet.getValueList().size(), 5);
+        Assert.assertEquals(5,newSet.getValueList().size());
 
     }
 
@@ -74,7 +74,7 @@ public class ChoiceSetRepoTest {
         Assert.assertNotNull(digits.getId());
         ChoiceSet newSet = repo.findById(digits.getId()).orElse(null);
         Assert.assertNotNull(newSet);
-        Assert.assertEquals(newSet.getValueList().size(), 6);
+        Assert.assertEquals(6,newSet.getValueList().size());
 
     }
 

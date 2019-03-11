@@ -7,13 +7,15 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.util.*;
+import java.util.Collections;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Entity
 @NoArgsConstructor
 @Table(name = "choice_values")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+//todo добавить методы equals/hashCode/toString
 public class ChoiceValue {
 
     @Id
@@ -21,15 +23,14 @@ public class ChoiceValue {
     private Long valueId;
 
     @ManyToOne
-    private ChoiceValue parent_id;
+    private ChoiceValue parentId;
 
-    @NotNull
     private String value;
 
     @ManyToOne
-    private ChoiceSet choice_set;
+    private ChoiceSet choiceSet;
 
-    @OneToMany (mappedBy = "parent_id", orphanRemoval = true, cascade = CascadeType.ALL)
+    @OneToMany (mappedBy = "parentId", orphanRemoval = true, cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private Set<ChoiceValue> childValues = new LinkedHashSet<>();
@@ -51,20 +52,20 @@ public class ChoiceValue {
     }
 
     public ChoiceSet getChoiceSet() {
-        return choice_set;
+        return choiceSet;
     }
 
     public ChoiceValue getParentId() {
-        return parent_id;
+        return parentId;
     }
 
     public ChoiceValue setParentId(ChoiceValue parentId) {
-        this.parent_id = parentId;
+        this.parentId = parentId;
         return this;
     }
 
     public ChoiceValue setChoiceSet(ChoiceSet choiceSet) {
-        this.choice_set = choiceSet;
+        this.choiceSet = choiceSet;
         return this;
     }
 

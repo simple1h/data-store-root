@@ -17,7 +17,7 @@ import java.util.Set;
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class ChoiceSet extends DataModelObject{
 
-    @OneToMany (mappedBy = "choice_set", orphanRemoval = true, cascade = CascadeType.ALL)
+    @OneToMany (mappedBy = "choiceSet", orphanRemoval = true, cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private Set<ChoiceValue> valueList = new LinkedHashSet<>();

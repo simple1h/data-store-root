@@ -82,7 +82,7 @@ public class ObjectInstanceRepoTest {
 //        ObjectInstance newInstance = objectInstanceRepo.findById(instance.getObjectInstanceId()).orElse(null);
         ObjectInstance newInstance = objectInstanceRepo.findObjectInstanceByObjectInstanceId(instance.getObjectInstanceId()).orElse(null);
         Assert.assertNotNull(newInstance);
-        Assert.assertEquals(newInstance.getValues().size(), 1);
+        Assert.assertEquals(1,newInstance.getValues().size());
 //        instance = objectInstanceRepo.save(instance);
 //        attrRepo.save(value);
 //        instance.addValue(value);
@@ -109,7 +109,7 @@ public class ObjectInstanceRepoTest {
         Assert.assertNotNull(instance.getObjectInstanceId());
         ObjectInstance newInstance = objectInstanceRepo.findObjectInstanceByObjectInstanceId(instance.getObjectInstanceId()).orElse(null);
         Assert.assertNotNull(newInstance);
-        Assert.assertEquals(newInstance.getValues().size(), 2);
+        Assert.assertEquals(2,newInstance.getValues().size());
     }
 
     @Test
@@ -131,12 +131,12 @@ public class ObjectInstanceRepoTest {
         Assert.assertNotNull(instance.getObjectInstanceId());
         ObjectInstance newInstance = objectInstanceRepo.findObjectInstanceByObjectInstanceId(instance.getObjectInstanceId()).orElse(null);
         Assert.assertNotNull(newInstance);
-        Assert.assertEquals(newInstance.getValues().size(), 2);
+        Assert.assertEquals(2,newInstance.getValues().size());
         newInstance.removeValue(lVal);
         objectInstanceRepo.save(newInstance);
         ObjectInstance instance1 = objectInstanceRepo.findObjectInstanceByObjectInstanceId(instance.getObjectInstanceId()).orElse(null);
         Assert.assertNotNull(instance1);
-        Assert.assertEquals(instance1.getValues().size(), 1);
+        Assert.assertEquals(1,instance1.getValues().size());
     }
 
     @Test
@@ -159,7 +159,7 @@ public class ObjectInstanceRepoTest {
         Assert.assertNotNull(instance.getObjectInstanceId());
         ObjectInstance newInstance = objectInstanceRepo.findObjectInstanceByObjectInstanceId(instance.getObjectInstanceId()).orElse(null);
         Assert.assertNotNull(newInstance);
-        Assert.assertEquals(newInstance.getValues().size(), 2);
+        Assert.assertEquals(2,newInstance.getValues().size());
         newInstance.replaceValue(lVal,lVal1);
         objectInstanceRepo.save(newInstance);
         ObjectInstance instance1 = objectInstanceRepo.findObjectInstanceByObjectInstanceId(instance.getObjectInstanceId()).orElse(null);
