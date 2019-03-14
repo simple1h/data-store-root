@@ -42,5 +42,5 @@ jobs:
         key: v1-dependencies-{{ checksum "build.gradle" }}
 
     # run tests!
-    - run: ./gradle test
+    - run: ./gradlew test
 #    - run: gradle sonarqube   -Dsonar.projectKey=simple1h_data-store-root   -Dsonar.organization=simple1h-github   -Dsonar.host.url=https://sonarcloud.io   -Dsonar.login=f9953c712146e72cbca52bc873f03dbc0222ffee
