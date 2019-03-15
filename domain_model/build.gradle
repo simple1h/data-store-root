@@ -38,8 +38,10 @@ dependencies {
 	implementation('org.postgresql:postgresql')
 //	runtimeOnly('org.postgresql:postgresql')
 	testRuntime("com.h2database:h2")
-	compile('org.projectlombok:lombok')
+	compileOnly 'org.projectlombok:lombok:1.18.6'
+	annotationProcessor 'org.projectlombok:lombok:1.18.6'
+//	compile('org.projectlombok:lombok')
 	testImplementation('org.springframework.boot:spring-boot-starter-test')
 	testImplementation group: 'org.hibernate', name: 'hibernate-ehcache', version: '5.2.17.Final'
-	annotationProcessor('org.projectlombok:lombok')
+//	annotationProcessor('org.projectlombok:lombok')
 }
