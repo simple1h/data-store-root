@@ -9,9 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
-import sun.net.www.MimeTable;
-
-import java.util.Iterator;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -44,7 +41,6 @@ public class ObjectInstanceRepoTest {
 //        attributeRepo.save(attribute);
 
     }
-
     @Test
     public void persistEmptyObjectInstance() {
 //        todo создать ObjectClass
