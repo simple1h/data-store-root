@@ -65,10 +65,10 @@ public class AttributeRepoTest {
 
             isSaved = true;
         } else {
-            pLong = propertyRepo.findByInfoName("LONG property");
-            pString = propertyRepo.findByInfoName("string property");
-            pString1 = propertyRepo.findByInfoName("string property1");
-            pDate = propertyRepo.findByInfoName("Date property");
+            pLong = propertyRepo.findByInfoName("LONG property").get();
+            pString = propertyRepo.findByInfoName("string property").get();
+            pString1 = propertyRepo.findByInfoName("string property1").get();
+            pDate = propertyRepo.findByInfoName("Date property").get();
         }
 
         stringVal = propValFactory.createStringValue(pString,"test_value");

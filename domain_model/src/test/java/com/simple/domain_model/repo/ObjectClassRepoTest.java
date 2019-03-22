@@ -62,10 +62,10 @@ public class ObjectClassRepoTest {
 
             isSaved = true;
         } else {
-            pLong = propertyRepo.findByInfoName("object_long property");
-            pString = propertyRepo.findByInfoName("object_string property");
-            pString1 = propertyRepo.findByInfoName("object_string property1");
-            pDate = propertyRepo.findByInfoName("object_date property");
+            pLong = propertyRepo.findByInfoName("object_long property").get();
+            pString = propertyRepo.findByInfoName("object_string property").get();
+            pString1 = propertyRepo.findByInfoName("object_string property1").get();
+            pDate = propertyRepo.findByInfoName("object_date property").get();
         }
 
         stringVal = propValFactory.createStringValue(pString,"test_value");
