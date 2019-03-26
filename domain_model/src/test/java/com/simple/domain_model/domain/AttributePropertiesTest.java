@@ -2,6 +2,7 @@ package com.simple.domain_model.domain;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +13,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import javax.naming.OperationNotSupportedException;
 import java.util.*;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
-@TestPropertySource(locations = "classpath:application-inttest.properties")
 public class AttributePropertiesTest {
 
     private Property pString;
@@ -25,14 +23,17 @@ public class AttributePropertiesTest {
     private PropertyValue longVal;
     private PropertyValue dateVal;
 
-    @Autowired
-    DataModelFactory.PropertyValueFactory propValFactory;
-    @Autowired
-    DataModelFactory.PropertyFactory propFactory;
-    @Autowired
-    DataModelFactory.EntityInfoFactory infoFactory;
-//    @Autowired
-//    DataModelFactory.AttributePropertiesFactory mapFactory;
+    private static DataModelFactory.PropertyValueFactory propValFactory;
+    private static DataModelFactory.PropertyFactory propFactory;
+    private static DataModelFactory.EntityInfoFactory infoFactory;
+
+    @BeforeClass
+    public static void setUpFactory() throws Exception {
+        propValFactory = new DataModelFactory().new PropertyValueFactory();
+        propFactory = new DataModelFactory().new PropertyFactory();
+        infoFactory = new DataModelFactory().new EntityInfoFactory();
+
+    }
 
     @Before
     public void setUp() throws Exception {
