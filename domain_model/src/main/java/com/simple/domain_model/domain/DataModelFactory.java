@@ -151,8 +151,8 @@ public class DataModelFactory {
     public class ChoiceValueFactory {
 
 
-        public ChoiceValue createChoiceValue(@NotEmpty String value) {
-            return new ChoiceValue(value);
+        public ChoiceValue createChoiceValue(@NotEmpty String value, @NotNull Long valueId) {
+            return new ChoiceValue(valueId, value);
         }
     }
     @Component

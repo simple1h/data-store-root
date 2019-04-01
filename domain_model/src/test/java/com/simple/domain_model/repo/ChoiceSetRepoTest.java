@@ -7,16 +7,15 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Stream;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@TestPropertySource(locations = "classpath:application-inttest.properties")
+//@TestPropertySource(locations = "classpath:application-inttest.properties")
 public class ChoiceSetRepoTest {
 
     @Autowired
@@ -31,6 +30,7 @@ public class ChoiceSetRepoTest {
 
 
     @Test
+    @DirtiesContext
     public void choiceSetPersistTest() {
         String name = "test_choice_set";
         String displayName = "display name";
@@ -44,17 +44,18 @@ public class ChoiceSetRepoTest {
     }
 
     @Test
+    @DirtiesContext
     public void addChoiceValueTest() {
         String name = "colors2";
         String displayName = "true colors";
         String description = "best true colors";
 
         ChoiceSet colorSet = choiceFactory.createChoiceSet(infoFactory.createEntityInfo(name, displayName, description))
-                .addValue(choiceValFactory.createChoiceValue("red"))
-                .addValue(choiceValFactory.createChoiceValue("blue"))
-                .addValue(choiceValFactory.createChoiceValue("black"))
-                .addValue(choiceValFactory.createChoiceValue("white"))
-                .addValue(choiceValFactory.createChoiceValue("yellow"));
+                .addValue(choiceValFactory.createChoiceValue("red", 1L))
+                .addValue(choiceValFactory.createChoiceValue("blue",2L))
+                .addValue(choiceValFactory.createChoiceValue("black",3L))
+                .addValue(choiceValFactory.createChoiceValue("white",4L))
+                .addValue(choiceValFactory.createChoiceValue("yellow",5L));
 
         repo.save(colorSet);
         Assert.assertNotNull(colorSet.getId());
@@ -65,12 +66,14 @@ public class ChoiceSetRepoTest {
     }
 
     @Test
+    @DirtiesContext
     public void addChoiceValuesStreamStyleTest() {
         String name = "digit words";
 
         ChoiceSet digits = choiceFactory.createChoiceSet(infoFactory.createEntityInfo(name));
+        Long[] valueId = {1L};
         Stream.of("one", "two", "three", "four", "five", "six").
-                forEach(color -> digits.addValue(choiceValFactory.createChoiceValue(color)));
+                forEach(color -> digits.addValue(choiceValFactory.createChoiceValue(color,valueId[0]++)));
 
         repo.save(digits);
         Assert.assertNotNull(digits.getId());
@@ -81,27 +84,28 @@ public class ChoiceSetRepoTest {
     }
 
     @Test
+    @DirtiesContext
     public void hirarchiListTest() {
         String name = "colors";
         String displayName = "true colors";
         String description = "best true colors";
 
         ChoiceSet colorSet = choiceFactory.createChoiceSet(infoFactory.createEntityInfo(name, displayName, description));
-        colorSet.addValueAsParent(choiceValFactory.createChoiceValue("red"))
-                    .addValue(choiceValFactory.createChoiceValue("sub_red1"))
-                    .addValue(choiceValFactory.createChoiceValue("sub_red2"))
-                    .addValue(choiceValFactory.createChoiceValue("sub_red4"))
-                    .addValueAsParent(choiceValFactory.createChoiceValue("sub_red3"))
-                        .addValue(choiceValFactory.createChoiceValue("sub_sub_red3"))
-                        .addValue(choiceValFactory.createChoiceValue("sub_sub_red4"))
-                        .addValue(choiceValFactory.createChoiceValue("sub_sub_red5"))
-                        .addValue(choiceValFactory.createChoiceValue("sub_sub_red6"))
-                    .getParentId()
+        colorSet.addValuesNode(choiceValFactory.createChoiceValue("red",1L))
+                    .addValue(choiceValFactory.createChoiceValue("sub_red1",2L))
+                    .addValue(choiceValFactory.createChoiceValue("sub_red2",3L))
+                    .addValue(choiceValFactory.createChoiceValue("sub_red4",4L))
+                    .addValuesNode(choiceValFactory.createChoiceValue("sub_red3",5L))
+                        .addValue(choiceValFactory.createChoiceValue("sub_sub_red3",6L))
+                        .addValue(choiceValFactory.createChoiceValue("sub_sub_red4",7L))
+                        .addValue(choiceValFactory.createChoiceValue("sub_sub_red5",8L))
+                        .addValue(choiceValFactory.createChoiceValue("sub_sub_red6",9L))
+                    .getParent()
                 .getChoiceSet()
-                .addValue(choiceValFactory.createChoiceValue("blue"))
-                .addValue(choiceValFactory.createChoiceValue("black"))
-                .addValue(choiceValFactory.createChoiceValue("white"))
-                .addValue(choiceValFactory.createChoiceValue("yellow"));
+                .addValue(choiceValFactory.createChoiceValue("blue",10L))
+                .addValue(choiceValFactory.createChoiceValue("black",11L))
+                .addValue(choiceValFactory.createChoiceValue("white",12L))
+                .addValue(choiceValFactory.createChoiceValue("yellow",13L));
 
         repo.save(colorSet);
         Assert.assertNotNull(colorSet.getId());
@@ -111,6 +115,7 @@ public class ChoiceSetRepoTest {
     }
 
     @Test
+    @DirtiesContext
     public void readOnlyChoiceSetTest() {
         String name = "colors1";
         String displayName = "true colors";

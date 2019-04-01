@@ -16,10 +16,11 @@ import java.util.Set;
 @Table(name = "choice_values")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 //todo добавить методы equals/hashCode/toString
+//todo изменить генератор Id
 public class ChoiceValue {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long valueId;
 
     @ManyToOne
@@ -35,8 +36,9 @@ public class ChoiceValue {
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private Set<ChoiceValue> childValues = new LinkedHashSet<>();
 
-    ChoiceValue(String value) {
-        setValue(value);
+    ChoiceValue(Long valueId, String value) {
+        this.valueId = valueId;
+        this.value = value;
     }
 
     public Long getValueId() {
@@ -55,12 +57,12 @@ public class ChoiceValue {
         return choiceSet;
     }
 
-    public ChoiceValue getParentId() {
+    public ChoiceValue getParent() {
         return parentId;
     }
 
-    public ChoiceValue setParentId(ChoiceValue parentId) {
-        this.parentId = parentId;
+    public ChoiceValue setParent(ChoiceValue parent) {
+        this.parentId = parent;
         return this;
     }
 
@@ -70,12 +72,12 @@ public class ChoiceValue {
     }
 
     public ChoiceValue addValue(ChoiceValue value) {
-        this.childValues.add(value.setParentId(this));
+        this.childValues.add(value.setParent(this));
         return this;
     }
 
-    public ChoiceValue addValueAsParent(ChoiceValue value){
-        this.childValues.add(value.setParentId(this));
+    public ChoiceValue addValuesNode(ChoiceValue value){
+        this.childValues.add(value.setParent(this));
         return value;
     }
 

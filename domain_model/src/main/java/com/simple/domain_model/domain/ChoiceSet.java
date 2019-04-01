@@ -32,7 +32,7 @@ public class ChoiceSet extends DataModelObject{
         return this;
     }
 
-    public ChoiceValue addValueAsParent(ChoiceValue value){
+    public ChoiceValue addValuesNode(ChoiceValue value){
         this.valueList.add(value);
         value.setChoiceSet(this);
         return value;

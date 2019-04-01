@@ -1,4 +1,4 @@
-package com.simple.domain_model.serices;
+package com.simple.domain_model.services;
 
 import com.simple.domain_model.domain.DataModelFactory;
 import com.simple.domain_model.domain.Property;

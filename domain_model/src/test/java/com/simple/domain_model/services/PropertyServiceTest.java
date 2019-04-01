@@ -1,10 +1,9 @@
-package com.simple.domain_model.service;
+package com.simple.domain_model.services;
 
 import com.simple.domain_model.domain.DataModelFactory;
 import com.simple.domain_model.domain.EntityInfo;
 import com.simple.domain_model.domain.Property;
 import com.simple.domain_model.repo.PropertyRepo;
-import com.simple.domain_model.serices.PropertyService;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

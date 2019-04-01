@@ -49,7 +49,7 @@ public class DataModelFactoryTest {
 
     @Test
     public void createChoiceValueTest() {
-        ChoiceValue value = choiceValFactory.createChoiceValue("choiceValue");
+        ChoiceValue value = choiceValFactory.createChoiceValue("choiceValue", 1L);
         Assert.assertNotNull(value);
     }
 
@@ -102,7 +102,7 @@ public class DataModelFactoryTest {
     @Test
     public void createChoiceAttributeValueTest() {
         Attribute attribute = attrFactory.createChoiceAttribute(infoFactory.createEntityInfo("testAttributeName"));
-        ChoiceAttributeValue value = valFactory.createChoiceAttrVal(attribute, choiceValFactory.createChoiceValue("test"));
+        ChoiceAttributeValue value = valFactory.createChoiceAttrVal(attribute, choiceValFactory.createChoiceValue("test", 1L));
         Assert.assertEquals("test",value.getValue().getValue());
     }
 
@@ -143,7 +143,7 @@ public class DataModelFactoryTest {
     @Test (expected = ConstraintViolationException.class)
     public void validateChoicePropertyTypeTest() throws  OperationNotSupportedException {
         Property property = propFactory.createLongProperty(infoFactory.createEntityInfo("testPropertyName"));
-        PropertyValue value = propValFactory.createChoiceValue(property, choiceValFactory.createChoiceValue("test"));
+        PropertyValue value = propValFactory.createChoiceValue(property, choiceValFactory.createChoiceValue("test", 1L));
         Assert.assertEquals("test",value.getStringValue());
     }
 
@@ -177,7 +177,7 @@ public class DataModelFactoryTest {
     @Test
     public void createChoicePropertyValueTest() throws OperationNotSupportedException {
         Property property = propFactory.createChoiceProperty(infoFactory.createEntityInfo("choicePropertyName"));
-        PropertyValue value = propValFactory.createChoiceValue(property, choiceValFactory.createChoiceValue("test"));
+        PropertyValue value = propValFactory.createChoiceValue(property, choiceValFactory.createChoiceValue("test",1L));
         Assert.assertEquals("test",value.getChoiceValue().getValue());
     }
 

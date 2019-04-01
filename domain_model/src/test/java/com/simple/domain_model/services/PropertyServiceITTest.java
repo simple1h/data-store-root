@@ -1,7 +1,6 @@
-package com.simple.domain_model.service;
+package com.simple.domain_model.services;
 
 import com.simple.domain_model.domain.Property;
-import com.simple.domain_model.serices.PropertyService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
