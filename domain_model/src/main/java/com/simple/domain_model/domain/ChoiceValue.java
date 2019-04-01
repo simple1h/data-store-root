@@ -9,18 +9,16 @@ import org.hibernate.annotations.LazyCollectionOption;
 import javax.persistence.*;
 import java.util.Collections;
 import java.util.LinkedHashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
 @NoArgsConstructor
 @Table(name = "choice_values")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-//todo добавить методы equals/hashCode/toString
-//todo изменить генератор Id
 public class ChoiceValue {
 
     @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long valueId;
 
     @ManyToOne
@@ -90,4 +88,26 @@ public class ChoiceValue {
         return Collections.unmodifiableSet(childValues);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ChoiceValue)) return false;
+        ChoiceValue o1 = (ChoiceValue) o;
+        return Objects.equals(valueId, o1.valueId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(valueId);
+    }
+
+    @Override
+    public String toString() {
+        return "ChoiceValue{" +
+                "valueId=" + valueId +
+                ", parentId=" + parentId +
+                ", value='" + value + '\'' +
+                ", choiceSetName=" + choiceSet.getInfo().getName() +
+                '}';
+    }
 }
