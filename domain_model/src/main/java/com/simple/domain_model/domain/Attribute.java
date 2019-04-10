@@ -39,8 +39,10 @@ public class Attribute extends DataModelObject{
     }
 
     public Attribute addObjectClass(ObjectClass aClass) {
-        this.objectClasses.add(aClass);
-        if (!aClass.attributes().contains(this)) aClass.addAttribute(this);
+        if (Objects.nonNull(aClass)) {
+            this.objectClasses.add(aClass);
+            if (!aClass.attributes().contains(this)) aClass.addAttribute(this);
+        }
         return this;
     }
 

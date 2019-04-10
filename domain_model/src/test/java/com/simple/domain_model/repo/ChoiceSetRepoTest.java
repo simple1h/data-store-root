@@ -15,7 +15,7 @@ import java.util.stream.Stream;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-//@TestPropertySource(locations = "classpath:application-inttest.properties")
+@TestPropertySource(locations = "classpath:application-inttest.properties")
 public class ChoiceSetRepoTest {
 
     @Autowired

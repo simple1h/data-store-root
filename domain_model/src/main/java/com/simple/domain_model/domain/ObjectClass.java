@@ -7,10 +7,8 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
-import java.util.Collections;
-import java.util.LinkedHashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @NoArgsConstructor
 @Entity
@@ -60,8 +58,13 @@ public class ObjectClass extends DataModelObject{
         return aClass;
     }
 
+    /*сделано так, потому что в Hibernate для коллекции Set<> не работает метод remove() в некоторых случаях
+    * {@link https://hibernate.atlassian.net/browse/HHH-3799}*/
     public ObjectClass removeChild(ObjectClass aClass) {
-        this.childs.remove(aClass.parent(null));
+        Set<ObjectClass> newChilds = childs.stream().filter(objectClass -> !objectClass.equals(aClass)).collect(Collectors.toSet());
+        childs.clear();
+        this.childs.addAll(newChilds);
+        aClass.parent(null);
         return this;
     }
 
@@ -74,8 +77,10 @@ public class ObjectClass extends DataModelObject{
     }
 
     public ObjectClass addAttribute(Attribute attribute) {
-        this.attributes.add(attribute);
-        if (!attribute.objectClasses().contains(this)) attribute.addObjectClass(this);
+        if (Objects.nonNull(attribute)) {
+            this.attributes.add(attribute);
+            if (!attribute.objectClasses().contains(this)) attribute.addObjectClass(this);
+        }
         return this;
     }
 
