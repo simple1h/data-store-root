@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class PropertyService {
+public class PropertyService implements DataModelDAO<Property>{
 
 
     private DataModelFactory.PropertyFactory propFactory;
@@ -39,27 +39,33 @@ public class PropertyService {
         return propFactory.createChoiceProperty(infoFactory.createEntityInfo(name,displayName,description));
     }
 
+    @Override
     public void save(Property property) {
         repo.save(property);
     }
 
+    @Override
     public void saveAll(Iterable<Property> properties) {
         repo.saveAll(properties);
     }
 
+    @Override
     public Optional<Property> findById(Long id) {
         return repo.findById(id);
     }
 
+    @Override
     public Optional<Property> findByInfoName(String name) {
         return repo.findByInfoName(name);
     }
 
-    public void deletePropertyById(Long id) {
+    @Override
+    public void deleteById(Long id) {
         repo.deleteById(id);
     }
 
-    public void deleteAllProperties(Iterable<Property> properties) {
+    @Override
+    public void deleteAll(Iterable<Property> properties) {
         repo.deleteAll(properties);
     }
 }

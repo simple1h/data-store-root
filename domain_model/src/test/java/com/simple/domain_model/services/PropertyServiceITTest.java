@@ -63,8 +63,8 @@ public class PropertyServiceITTest {
         Assert.assertNotNull(newDataProperty);
         Assert.assertNotNull(newChoiceProperty);
 
-        service.deletePropertyById(newChoiceProperty.getId());
-        service.deleteAllProperties(Arrays.asList(newStringProperty,newLongProperty,newDataProperty));
+        service.deleteById(newChoiceProperty.getId());
+        service.deleteAll(Arrays.asList(newStringProperty,newLongProperty,newDataProperty));
 
         Assert.assertNull(service.findById(stringProperty.getId()).orElse(null));
         Assert.assertNull(service.findById(longProperty.getId()).orElse(null));

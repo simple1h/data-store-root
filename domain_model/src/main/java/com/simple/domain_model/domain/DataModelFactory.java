@@ -13,6 +13,7 @@ import java.util.Date;
 @Validated
 public class DataModelFactory {
 
+//    todo вынести ObjectInstanceFactory и AttributeValueFactory в DataInstanceFactory (DS-19)
     @Component
     @Validated
     public class AttributeValueFactory {

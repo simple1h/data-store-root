@@ -66,8 +66,8 @@ public class AttributeServiceITTest {
         Assert.assertNotNull(newDateAttribute);
         Assert.assertNotNull(newLongAttribute);
 
-        attrService.deleteAttributeById(newAttribute.getId());
-        attrService.deleteAllAttributes(Arrays.asList(newDateAttribute,newLongAttribute));
+        attrService.deleteById(newAttribute.getId());
+        attrService.deleteAll(Arrays.asList(newDateAttribute,newLongAttribute));
 
         Assert.assertNull(attrService.findById(newAttribute.getId()).orElse(null));
         Assert.assertNull(attrService.findById(newDateAttribute.getId()).orElse(null));

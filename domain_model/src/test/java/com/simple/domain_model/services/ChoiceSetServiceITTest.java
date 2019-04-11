@@ -28,16 +28,16 @@ public class ChoiceSetServiceITTest {
         choiceSet.addValue(service.createChoiceValue("value4",4L));
         choiceSet.addValue(service.createChoiceValue("value5",5L));
 
-        service.saveChoiceSet(choiceSet);
+        service.save(choiceSet);
         Assert.assertNotNull(choiceSet.getId());
 
         ChoiceSet newChoiceSet = service.findById(choiceSet.getId()).get();
         ChoiceValue value = newChoiceSet.getValueList().stream().filter(fValue -> fValue.getValue().equalsIgnoreCase("value3")).findAny().orElse(null);
         newChoiceSet.removeValue(value);
-        service.saveChoiceSet(newChoiceSet);
+        service.save(newChoiceSet);
         Assert.assertEquals(4,service.findById(newChoiceSet.getId()).get().getValueList().size());
-        ChoiceSet newChoiceSet1 = service.findByName("name").get();
-        service.deleteChoiceSetById(newChoiceSet1.getId());
+        ChoiceSet newChoiceSet1 = service.findByInfoName("name").get();
+        service.deleteById(newChoiceSet1.getId());
         Assert.assertNull(service.findById(newChoiceSet1.getId()).orElse(null));
     }
 
@@ -62,7 +62,7 @@ public class ChoiceSetServiceITTest {
                 .addValue(service.createChoiceValue("value3", 14L))
                 .addValue(service.createChoiceValue("value4", 15L));
 
-        service.saveChoiceSet(choiceSet);
+        service.save(choiceSet);
         Assert.assertNotNull(choiceSet.getId());
         ChoiceSet newChoiceSet = service.findById(choiceSet.getId()).get();
         Assert.assertEquals(4,newChoiceSet.getValueList().size());
@@ -78,12 +78,12 @@ public class ChoiceSetServiceITTest {
         newChoiceSet.getValueList()
                 .stream().filter(value -> value.getValueId() == 1L).findAny().get().getChildValues()
                 .stream().filter(value -> value.getValueId() == 5L).findAny().get().removeValue(valForDel);
-        service.saveChoiceSet(newChoiceSet);
-        ChoiceSet newChoiceSet1 = service.findByName("name").get();
+        service.save(newChoiceSet);
+        ChoiceSet newChoiceSet1 = service.findByInfoName("name").get();
         Assert.assertEquals(3,newChoiceSet1.getValueList()
                 .stream().filter(value -> value.getValueId() == 1L).findAny().get().getChildValues()
                 .stream().filter(value -> value.getValueId() == 5L).findAny().get().getChildValues().size());
-        service.deleteChoiceSetById(newChoiceSet1.getId());
+        service.deleteById(newChoiceSet1.getId());
         Assert.assertNull(service.findById(newChoiceSet1.getId()).orElse(null));
     }
 }

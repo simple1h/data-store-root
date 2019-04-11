@@ -172,7 +172,7 @@ public class AttributeServiceTest {
 
     @Test
     public void deleteAttributeByIdTest() {
-        service.deleteAttributeById(1L);
+        service.deleteById(1L);
         verify(attributeRepo, times(1)).deleteById(anyLong());
     }
 
@@ -192,7 +192,7 @@ public class AttributeServiceTest {
         attributes.add(service.createStringAttribute(name, displayName, description));
         attributes.add(service.createStringAttribute(name, displayName, description));
 
-        service.deleteAllAttributes(attributes);
+        service.deleteAll(attributes);
 
         verify(attributeFactory, times(5)).createStringAttribute(any(EntityInfo.class));
         verify(infoFactory, times(5)).createEntityInfo(anyString(), anyString(), anyString());

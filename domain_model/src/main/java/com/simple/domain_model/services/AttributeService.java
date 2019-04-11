@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class AttributeService {
+public class AttributeService implements DataModelDAO<Attribute> {
 
     private DataModelFactory.AttributeFactory attributeFactory;
     private DataModelFactory.EntityInfoFactory infoFactory;
@@ -42,27 +42,33 @@ public class AttributeService {
         return attributeFactory.createChoiceAttribute(infoFactory.createEntityInfo(name,displayName,description));
     }
 
+    @Override
     public void save(Attribute attribute) {
         repo.save(attribute);
     }
 
+    @Override
     public void saveAll(Iterable<Attribute> attributes) {
         repo.saveAll(attributes);
     }
 
+    @Override
     public Optional<Attribute> findById(Long id) {
         return repo.findById(id);
     }
 
+    @Override
     public Optional<Attribute> findByInfoName(String name) {
         return repo.findByInfoName(name);
     }
 
-    public void deleteAttributeById(Long id) {
+    @Override
+    public void deleteById(Long id) {
         repo.deleteById(id);
     }
 
-    public void deleteAllAttributes(Iterable<Attribute> attributes) {
-        repo.deleteAll(attributes);
+    @Override
+    public void deleteAll(Iterable<Attribute> dataModelObjects) {
+        repo.deleteAll(dataModelObjects);
     }
 }

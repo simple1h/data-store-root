@@ -66,7 +66,7 @@ public class ChoiceSetServiceTest {
         when(choiceSetFactory.createChoiceSet(any(EntityInfo.class))).thenReturn(new ChoiceSet());
 
         ChoiceSet choiceSet = service.createChoiceSet("name", "displayName", "description");
-        service.saveChoiceSet(choiceSet);
+        service.save(choiceSet);
 
         Assert.assertNotNull(choiceSet);
         verify(infoFactory, times(1)).createEntityInfo(anyString(),anyString(),anyString());
@@ -90,7 +90,7 @@ public class ChoiceSetServiceTest {
 
         when(repo.findByInfoName(anyString())).thenReturn(Optional.of(new ChoiceSet()));
 
-        ChoiceSet choiceSet = service.findByName("name").get();
+        ChoiceSet choiceSet = service.findByInfoName("name").get();
         Assert.assertNotNull(choiceSet);
 
         verify(repo, times(1)).findByInfoName(anyString());
@@ -98,7 +98,7 @@ public class ChoiceSetServiceTest {
 
     @Test
     public void deleteChoiceSetByIdTest() {
-        service.deleteChoiceSetById(1L);
+        service.deleteById(1L);
         verify(repo, times(1)).deleteById(anyLong());
     }
 }

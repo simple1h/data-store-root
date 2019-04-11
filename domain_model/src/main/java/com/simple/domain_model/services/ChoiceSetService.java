@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class ChoiceSetService {
+public class ChoiceSetService implements DataModelDAO<ChoiceSet>{
 
     private DataModelFactory.ChoiceSetFactory choiceSetFactory;
     private DataModelFactory.EntityInfoFactory infoFactory;
@@ -31,19 +31,23 @@ public class ChoiceSetService {
         return choiceValueFactory.createChoiceValue(value, valueId);
     }
 
-    public void saveChoiceSet(ChoiceSet choiceSet) {
+    @Override
+    public void save(ChoiceSet choiceSet) {
         repo.save(choiceSet);
     }
 
+    @Override
     public Optional<ChoiceSet> findById(Long id) {
         return repo.findById(id);
     }
 
-    public Optional<ChoiceSet> findByName(String name) {
+    @Override
+    public Optional<ChoiceSet> findByInfoName(String name) {
         return repo.findByInfoName(name);
     }
 
-    public void deleteChoiceSetById(Long id) {
+    @Override
+    public void deleteById(Long id) {
         repo.deleteById(id);
     }
 }

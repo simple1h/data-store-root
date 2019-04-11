@@ -174,7 +174,7 @@ public class PropertyServiceTest {
 
     @Test
     public void deletePropertyByIdTest() {
-        service.deletePropertyById(1L);
+        service.deleteById(1L);
         verify(propertyRepo, times(1)).deleteById(anyLong());
     }
 
@@ -194,7 +194,7 @@ public class PropertyServiceTest {
         properties.add(service.createStringProperty(name, displayName, description));
         properties.add(service.createStringProperty(name, displayName, description));
 
-        service.deleteAllProperties(properties);
+        service.deleteAll(properties);
 
         verify(propertyRepo, times(1)).deleteAll(anyIterable());
     }
