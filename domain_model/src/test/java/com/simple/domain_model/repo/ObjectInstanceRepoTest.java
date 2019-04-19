@@ -48,12 +48,11 @@ public class ObjectInstanceRepoTest {
         classRepo.save(aClass);
 //        todo создать на основе ObjectClass ObjectInstance
         EntityInfo info = infoFactory.createEntityInfo("objectInstanceName6");
-        ObjectInstance instance = objectInstanceFactory.createObjectInstance(info, aClass);
+        ObjectInstance instance = objectInstanceFactory.createObjectInstance(aClass);
 //        todo сохранить его, проверить результат
         objectInstanceRepo.save(instance);
-        Assert.assertNotNull(instance.getObjectInstanceId());
+        Assert.assertNotNull(instance.getId());
         Assert.assertEquals(aClass, instance.getClassId());
-        Assert.assertEquals(info, instance.getInfo());
     }
 
     @Test
@@ -62,8 +61,7 @@ public class ObjectInstanceRepoTest {
         ObjectClass aClass = objectClassFactory.createObjectClass(infoFactory.createEntityInfo("objectClassName7"));
         classRepo.save(aClass);
 //        todo создать на основе ObjectClass ObjectInstance
-        EntityInfo info = infoFactory.createEntityInfo("objectInstanceName7");
-        ObjectInstance instance = objectInstanceFactory.createObjectInstance(info, aClass);
+        ObjectInstance instance = objectInstanceFactory.createObjectInstance(aClass);
 //        todo создать аттрибут
         Attribute attribute = attrFactory.createStringAttribute(infoFactory.createEntityInfo("testAttributeName10"));
         attributeRepo.save(attribute);
@@ -74,16 +72,16 @@ public class ObjectInstanceRepoTest {
 //        StringAttributeValue value = valFactory.createStringAttrVal(attribute).setValue("test_attr_value");
 //        instance.setObjectInstanceId(1L);
 //        StringAttributeValue value = new StringAttributeValue(instance, attribute, "test_attr_value");
-        instance.addValue(valFactory.createStringAttrVal(attribute,"test_attr_value"));
+        instance.addAttrValue(valFactory.createStringAttrVal(attribute,"test_attr_value"));
         objectInstanceRepo.save(instance);
-        Assert.assertNotNull(instance.getObjectInstanceId());
-//        ObjectInstance newInstance = objectInstanceRepo.findById(instance.getObjectInstanceId()).orElse(null);
-        ObjectInstance newInstance = objectInstanceRepo.findObjectInstanceByObjectInstanceId(instance.getObjectInstanceId()).orElse(null);
+        Assert.assertNotNull(instance.getId());
+//        ObjectInstance newInstance = objectInstanceRepo.findById(instance.getId()).orElse(null);
+        ObjectInstance newInstance = objectInstanceRepo.findObjectInstanceById(instance.getId()).orElse(null);
         Assert.assertNotNull(newInstance);
-        Assert.assertEquals(1,newInstance.getValues().size());
+        Assert.assertEquals(1,newInstance.getAttrValues().size());
 //        instance = objectInstanceRepo.save(instance);
 //        attrRepo.save(value);
-//        instance.addValue(value);
+//        instance.addAttrValue(value);
 //        objectInstanceRepo.save(instance);
 //        todo добавить пару атрибут/значение атрибута в коллекцию ObjectInstance
 //        todo сохранить ObjectInstance, проверить результат
@@ -94,75 +92,71 @@ public class ObjectInstanceRepoTest {
     public void persistObjectWithLongAttrVal() {
         ObjectClass aClass = objectClassFactory.createObjectClass(infoFactory.createEntityInfo("objectClassName10"));
         classRepo.save(aClass);
-        EntityInfo info = infoFactory.createEntityInfo("objectClassName10");
-        ObjectInstance instance = objectInstanceFactory.createObjectInstance(info, aClass);
+        ObjectInstance instance = objectInstanceFactory.createObjectInstance(aClass);
         Attribute lAttribute = attrFactory.createLongAttribute(infoFactory.createEntityInfo("testLongAttributeName14"));
         Attribute strAttribute = attrFactory.createStringAttribute(infoFactory.createEntityInfo("testStringAttributeName14"));
         attributeRepo.save(lAttribute);
         attributeRepo.save(strAttribute);
         objectInstanceRepo.save(instance);
-        instance.addValue(valFactory.createLongAttrVal(lAttribute,1L));
-        instance.addValue(valFactory.createStringAttrVal(strAttribute,"test_attr_value"));
+        instance.addAttrValue(valFactory.createLongAttrVal(lAttribute,1L));
+        instance.addAttrValue(valFactory.createStringAttrVal(strAttribute,"test_attr_value"));
         objectInstanceRepo.save(instance);
-        Assert.assertNotNull(instance.getObjectInstanceId());
-        ObjectInstance newInstance = objectInstanceRepo.findObjectInstanceByObjectInstanceId(instance.getObjectInstanceId()).orElse(null);
+        Assert.assertNotNull(instance.getId());
+        ObjectInstance newInstance = objectInstanceRepo.findObjectInstanceById(instance.getId()).orElse(null);
         Assert.assertNotNull(newInstance);
-        Assert.assertEquals(2,newInstance.getValues().size());
+        Assert.assertEquals(2,newInstance.getAttrValues().size());
     }
 
     @Test
     public void removeAttrValTest() {
         ObjectClass aClass = objectClassFactory.createObjectClass(infoFactory.createEntityInfo("objectClassName8"));
         classRepo.save(aClass);
-        EntityInfo info = infoFactory.createEntityInfo("objectInstanceName8");
-        ObjectInstance instance = objectInstanceFactory.createObjectInstance(info, aClass);
+        ObjectInstance instance = objectInstanceFactory.createObjectInstance(aClass);
         Attribute lAttribute = attrFactory.createLongAttribute(infoFactory.createEntityInfo("testLongAttributeName12"));
         Attribute strAttribute = attrFactory.createStringAttribute(infoFactory.createEntityInfo("testStringAttributeName12"));
         attributeRepo.save(lAttribute);
         attributeRepo.save(strAttribute);
         objectInstanceRepo.save(instance);
         LongAttributeValue lVal = valFactory.createLongAttrVal(lAttribute,1L);
-        instance.addValue(lVal);
+        instance.addAttrValue(lVal);
         StringAttributeValue strVal = valFactory.createStringAttrVal(strAttribute, "test_attr_value");
-        instance.addValue(strVal);
+        instance.addAttrValue(strVal);
         objectInstanceRepo.save(instance);
-        Assert.assertNotNull(instance.getObjectInstanceId());
-        ObjectInstance newInstance = objectInstanceRepo.findObjectInstanceByObjectInstanceId(instance.getObjectInstanceId()).orElse(null);
+        Assert.assertNotNull(instance.getId());
+        ObjectInstance newInstance = objectInstanceRepo.findObjectInstanceById(instance.getId()).orElse(null);
         Assert.assertNotNull(newInstance);
-        Assert.assertEquals(2,newInstance.getValues().size());
-        newInstance.removeValue(lVal);
+        Assert.assertEquals(2,newInstance.getAttrValues().size());
+        newInstance.removeAttrValue(lVal);
         objectInstanceRepo.save(newInstance);
-        ObjectInstance instance1 = objectInstanceRepo.findObjectInstanceByObjectInstanceId(instance.getObjectInstanceId()).orElse(null);
+        ObjectInstance instance1 = objectInstanceRepo.findObjectInstanceById(instance.getId()).orElse(null);
         Assert.assertNotNull(instance1);
-        Assert.assertEquals(1,instance1.getValues().size());
+        Assert.assertEquals(1,instance1.getAttrValues().size());
     }
 
     @Test
-    public void replaceAttrValTest() {
+    public void changeAttrValTest() {
         ObjectClass aClass = objectClassFactory.createObjectClass(infoFactory.createEntityInfo("objectClassName9"));
         classRepo.save(aClass);
-        EntityInfo info = infoFactory.createEntityInfo("objectInstanceName9");
-        ObjectInstance instance = objectInstanceFactory.createObjectInstance(info, aClass);
+        ObjectInstance instance = objectInstanceFactory.createObjectInstance(aClass);
         Attribute lAttribute = attrFactory.createLongAttribute(infoFactory.createEntityInfo("testLongAttributeName13"));
         Attribute strAttribute = attrFactory.createStringAttribute(infoFactory.createEntityInfo("testStringAttributeName13"));
         attributeRepo.save(lAttribute);
         attributeRepo.save(strAttribute);
         objectInstanceRepo.save(instance);
         LongAttributeValue lVal = valFactory.createLongAttrVal(lAttribute,1L);
-        LongAttributeValue lVal1 = valFactory.createLongAttrVal(lAttribute,10L);
-        instance.addValue(lVal);
+        instance.addAttrValue(lVal);
         StringAttributeValue strVal = valFactory.createStringAttrVal(strAttribute, "test_attr_value");
-        instance.addValue(strVal);
+        instance.addAttrValue(strVal);
         objectInstanceRepo.save(instance);
-        Assert.assertNotNull(instance.getObjectInstanceId());
-        ObjectInstance newInstance = objectInstanceRepo.findObjectInstanceByObjectInstanceId(instance.getObjectInstanceId()).orElse(null);
+        Assert.assertNotNull(instance.getId());
+        ObjectInstance newInstance = objectInstanceRepo.findObjectInstanceById(instance.getId()).orElse(null);
         Assert.assertNotNull(newInstance);
-        Assert.assertEquals(2,newInstance.getValues().size());
-        newInstance.replaceValue(lVal,lVal1);
+        Assert.assertEquals(2,newInstance.getAttrValues().size());
+        ((LongAttributeValue)newInstance.getAttrValue(lVal.getAttr().getInfo().getName())).setValue(10L);
         objectInstanceRepo.save(newInstance);
-        ObjectInstance instance1 = objectInstanceRepo.findObjectInstanceByObjectInstanceId(instance.getObjectInstanceId()).orElse(null);
+        ObjectInstance instance1 = objectInstanceRepo.findObjectInstanceById(instance.getId()).orElse(null);
         Assert.assertNotNull(instance1);
-        Long l1 = ((LongAttributeValue) instance1.getValues().stream().filter(attr -> attr.getAttr().equals(lAttribute)).findFirst().get()).getValue();
+        Long l1 = ((LongAttributeValue) instance1.getAttrValue(lAttribute.getInfo().getName())).getValue();
         Assert.assertEquals(l1, Long.valueOf(10));
 
     }

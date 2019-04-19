@@ -43,7 +43,7 @@ public abstract class AttributeValue{
     public void setObject(ObjectInstance object) {
         if (object != null) {
             this.object = object;
-            this.id.setObjectId(object.getObjectInstanceId());
+            this.id.setObjectId(object.getId());
         } else {
             this.object = null;
             this.id.setObjectId(null);

@@ -36,13 +36,27 @@ public class DataModelFactory {
                 @CheckDataType(type = DataType.CHOICE_VALUE, message = "Only DataType.CHOICE_VALUE allowed") Attribute attribute, @Valid @NotNull ChoiceValue value) {
             return new ChoiceAttributeValue(attribute, value);
         }
-    }
+
+        public AttributeValue createAttrVal(@Valid @NotNull Attribute attribute, Object value) {
+            switch (attribute.getType()){
+                case STRING:
+                    return createStringAttrVal(attribute, (String)value);
+                case DATE_TIME:
+                    return createDateAttrVal(attribute, (Date) value);
+                case CHOICE_VALUE:
+                    return createChoiceAttrVal(attribute, (ChoiceValue)value);
+                case LONG:
+                    return createLongAttrVal(attribute, (Long) value);
+                default: throw new IllegalArgumentException ("Unknown attribute data type. Attribute: " + attribute.toString());
+            }
+        }
+}
 
     @Component
     @Validated
     public class ObjectInstanceFactory {
-        public ObjectInstance createObjectInstance(@Valid @NotNull EntityInfo info, @Valid @NotNull ObjectClass aClass) {
-            return new ObjectInstance(info, aClass);
+        public ObjectInstance createObjectInstance(@Valid @NotNull ObjectClass aClass) {
+            return new ObjectInstance(aClass);
         }
 
     }

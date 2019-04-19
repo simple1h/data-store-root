@@ -8,5 +8,5 @@ import java.util.Optional;
 
 public interface ObjectInstanceRepo extends JpaRepository<ObjectInstance, Long> {
     @EntityGraph(value = "instance_attribute_values")
-    Optional<ObjectInstance> findObjectInstanceByObjectInstanceId(Long objectInstanceId);
+    Optional<ObjectInstance> findObjectInstanceById(Long id);
 }
